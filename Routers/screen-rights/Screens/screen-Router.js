@@ -1,4 +1,4 @@
-const ScreenModel = require('../../Models/Screens/screen-Model');
+const ScreenModel = require('./../../../Models/screen-rights/Screens/screen-Model');
 const express = require("express");
 const router = express.Router();
 
