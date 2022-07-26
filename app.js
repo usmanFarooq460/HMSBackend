@@ -43,7 +43,11 @@ app.use('/user', userRouter);
 // const allUsersRouter = require('./Routers/Accounts/all-users-router');
 // app.use('/allUsers', allUsersRouter);
 
+//Screen Rights
 const screensRouter = require('./Routers/screen-rights/Screens/screen-Router');
 app.use('/screens', screensRouter);
+
+const screensRightsRouter = require('./Routers/screen-rights/screen-rights/screen-rights-router');
+app.use('/screens-rights', screensRightsRouter);
 
 module.exports = connectMongoos();
