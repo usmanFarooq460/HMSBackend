@@ -21,7 +21,9 @@ app.listen(3000, () => {
 function connectMongoos() {
     mongoose
         .connect(
-            "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
+            // "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
+            // "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1"
+            "mongodb://127.0.0.1:27017/Hospital_Management"
         )
         .then(() => {
             console.log("Data Base connected");
@@ -30,6 +32,7 @@ function connectMongoos() {
             console.log("not connected");
         });
 }
+connectMongoos()
 // ============Data base Connection==========
 
 
@@ -50,4 +53,6 @@ app.use('/screens', screensRouter);
 const screensRightsRouter = require('./Routers/screen-rights/screen-rights/screen-rights-router');
 app.use('/screens-rights', screensRightsRouter);
 
-module.exports = connectMongoos();
+// Pharmacy managment******************************************************
+const defDrugTypeRouter=require('./Routers/Pharmacy/def-drugs/def-drug-type/def-drug-type-router')
+app.use('/def-drugType',defDrugTypeRouter)

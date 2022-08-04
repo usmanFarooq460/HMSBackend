@@ -27,6 +27,10 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: [true, 'password is required'],
     },
+    role: {
+        type: String,
+        default: 'Admin'
+    },
     createdAt: {
         default: Date.now,
         type: Date,

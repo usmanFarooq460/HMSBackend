@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const screenRightsSchema = new mongoose.Schema({
-    screenNames: [
+    screenNamesList: [
         {
             Id: {
                 type: mongoose.Schema.Types.ObjectId,
