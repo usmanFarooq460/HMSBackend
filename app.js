@@ -13,11 +13,20 @@ app.use(cors({
     origin: '*'
 }));
 
-app.listen( () => {
-    console.log("running on port 3000");
+
+var server_port = 3000;
+var server_host = '0.0.0.0';
+app.listen(server_port, server_host, function () {
+    console.log('Listening on port %d', server_port);
 });
 
+// app.listen(() => {
+//     console.log("running on port 3000");
+// });
+
 // data base connection===============
+
+
 function connectMongoos() {
     mongoose
         .connect(
@@ -54,8 +63,8 @@ const screensRightsRouter = require('./Routers/screen-rights/screen-rights/scree
 app.use('/screens-rights', screensRightsRouter);
 
 // Pharmacy managment******************************************************
-const defDrugTypeRouter=require('./Routers/Pharmacy/def-drugs/def-drug-type/def-drug-type-router')
-app.use('/def-drugType',defDrugTypeRouter)
+const defDrugTypeRouter = require('./Routers/Pharmacy/def-drugs/def-drug-type/def-drug-type-router')
+app.use('/def-drugType', defDrugTypeRouter)
 
-const defDrugRouter=require('./Routers/Pharmacy/def-drugs/def-drugs-router')
-app.use('/def_drug',defDrugRouter)
+const defDrugRouter = require('./Routers/Pharmacy/def-drugs/def-drugs-router')
+app.use('/def_drug', defDrugRouter)
