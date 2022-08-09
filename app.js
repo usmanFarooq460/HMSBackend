@@ -56,3 +56,6 @@ app.use('/screens-rights', screensRightsRouter);
 // Pharmacy managment******************************************************
 const defDrugTypeRouter=require('./Routers/Pharmacy/def-drugs/def-drug-type/def-drug-type-router')
 app.use('/def-drugType',defDrugTypeRouter)
+
+const defDrugRouter=require('./Routers/Pharmacy/def-drugs/def-drugs-router')
+app.use('/def_drug',defDrugRouter)

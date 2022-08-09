@@ -33,6 +33,9 @@ router.put('/update/:id', async (req, resp) => {
 
 router.get('/getRightsByUserId/:id', async (req, res) => {
     let userId = req.params.id;
+    if (userId == undefined || userId == null) {
+        return res.status(500).json({ success: false, message: "id not found" });
+    }
     const singleUser = await UserModel.findOne({ _id: userId }).catch(err => console.log(err));
     let listOfAllRightsList = [];
     listOfAllRightsList = await screenRightsModel.find();
@@ -54,7 +57,7 @@ function gettingRightsList(id, listOfRights) {
             console.log("user found with some rights");
             matchedList = listOfRights[i];
         }
-    } 
+    }
     return matchedList
 }
 

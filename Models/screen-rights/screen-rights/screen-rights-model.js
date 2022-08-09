@@ -16,7 +16,7 @@ const screenRightsSchema = new mongoose.Schema({
         required: [true, 'Screen names are required or id is wrong']
     },
     userName: {
-        type: String
+        type: String,
     }
 });
 
