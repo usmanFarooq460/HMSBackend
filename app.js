@@ -21,9 +21,9 @@ app.listen( () => {
 function connectMongoos() {
     mongoose
         .connect(
-            // "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
+            "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
             // "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1"
-            "mongodb://127.0.0.1:27017/Hospital_Management"
+            // "mongodb://127.0.0.1:27017/Hospital_Management"
         )
         .then(() => {
             console.log("Data Base connected");
