@@ -13,7 +13,7 @@ app.use(cors({
     origin: '*'
 }));
 
-app.listen(3000, () => {
+app.listen( () => {
     console.log("running on port 3000");
 });
 
