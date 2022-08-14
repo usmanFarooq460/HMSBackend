@@ -22,4 +22,26 @@ router.post('/addNew', async (req, res) => {
     });
 });
 
+router.put('/update/:Id', async (req, res) => {
+    let id = req.body.params;
+    const newdrug = new defDrugModel(id, req.body);
+    newdrug.save().then(() => {
+        res.status(200).send(newdrug);
+    }).catch((err) => {
+        res.status(500).send(err);
+    });
+});
+
+router.delete("/delete/:Id", async (req, res) => {
+    defDrugModel.findByIdAndRemove(req.params.Id).then(defDrug => {
+        if (defDrug) {
+            return res.status(200).json({ success: true, message: "user has deleted: " });
+        } else {
+            return res.status(500).json({ success: false, message: "User Not Found: " });
+        }
+    }).catch(err => {
+        return res.status(500).json({ success: false, message: "error in deleting use" + err })
+    })
+});
+
 module.exports = router;

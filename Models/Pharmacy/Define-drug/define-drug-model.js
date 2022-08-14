@@ -5,7 +5,7 @@ const definingDrugSchema = new mongoose.Schema({
         type: String,
         required: 'Drug name is required'
     },
-    drugType: {
+    drugTypeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'drugtypes',
         required: 'Drug Type is required'
@@ -35,10 +35,14 @@ const definingDrugSchema = new mongoose.Schema({
         type: Number,
         required: [true, "retail price is required"]
     },
-    createdBy:{
+    drugTypeName: {
+        type: String,
+        required: [true, "Drug Type is required"]
+    },
+    createdBy: {
         type: String,
     },
-    createdAt:{
+    createdAt: {
         type: Date,
     }
 });

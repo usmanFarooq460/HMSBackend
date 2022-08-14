@@ -3,9 +3,11 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-
+const morgan =require("morgan")
 // MiddleWares
 app.use(express.json());
+app.use(morgan('tiny'));
+
 
 //Cors
 const cors = require('cors');
@@ -14,25 +16,22 @@ app.use(cors({
 }));
 
 
-var server_port = 3000;
-var server_host = '0.0.0.0';
-app.listen(server_port, server_host, function () {
-    console.log('Listening on port %d', server_port);
-});
-
-// app.listen(() => {
-//     console.log("running on port 3000");
+// var server_port = 3000;
+// var server_host = '0.0.0.0';
+// app.listen(server_port, server_host, function () {
+//     console.log('Listening on port %d', server_port);
 // });
 
+app.listen(3000, () => {
+    console.log("running on port 3000");
+});
+
 // data base connection===============
-
-
 function connectMongoos() {
     mongoose
         .connect(
-            "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
-            // "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1"
-            // "mongodb://127.0.0.1:27017/Hospital_Management"
+            // "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
+            "mongodb://127.0.0.1:27017/Hospital_Management"
         )
         .then(() => {
             console.log("Data Base connected");
