@@ -14,6 +14,7 @@ router.get("/getAll", async (req, res) => {
 });
 
 router.post('/addNew', async (req, res) => {
+    console.log("adding new screen right", req.body)
     const newScreenRight = new screenRightsModel(req.body);
     newScreenRight.save().then(() => {
         res.status(201).send(newScreenRight);

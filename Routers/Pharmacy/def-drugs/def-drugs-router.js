@@ -24,12 +24,13 @@ router.post('/addNew', async (req, res) => {
 
 router.put('/update/:Id', async (req, res) => {
     let id = req.body.params;
-    const newdrug = new defDrugModel(id, req.body);
-    newdrug.save().then(() => {
-        res.status(200).send(newdrug);
-    }).catch((err) => {
-        res.status(500).send(err);
-    });
+    console.log("body: ", req.body, "id:", id);
+    const updatedDrug = await defDrugModel.findByIdAndUpdate(id, req.body);
+    if (updatedDrug) {
+        res.status(200).send(updatedDrug)
+    } else {
+        res.status(500).send("something went wrong")
+    }
 });
 
 router.delete("/delete/:Id", async (req, res) => {

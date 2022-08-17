@@ -24,17 +24,12 @@ app.get("/", (req, res) => {
     res.send("Hoopital Apis Working");
 });
 
-
-// app.listen(3000, () => {
-//     console.log("running on port 3000");
-// });
-
 // data base connection===============
 function connectMongoos() {
     mongoose
         .connect(
-            "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
-            // "mongodb://127.0.0.1:27017/Hospital_Management"
+            // "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
+            "mongodb://127.0.0.1:27017/Hospital_Management"
         )
         .then(() => {
             console.log("Data Base connected");
