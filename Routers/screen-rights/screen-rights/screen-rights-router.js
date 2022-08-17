@@ -14,7 +14,11 @@ router.get("/getAll", async (req, res) => {
 });
 
 router.post('/addNew', async (req, res) => {
-    console.log("adding new screen right", req.body)
+    console.log("adding new screen right", req.body);
+    // screenRightsModel.collection.dropAllIndexes(function (err, results) {
+    //     // Handle errors
+    // });
+    screenRightsModel.dropIndexes();
     const newScreenRight = new screenRightsModel(req.body);
     newScreenRight.save().then(() => {
         res.status(201).send(newScreenRight);
@@ -22,6 +26,8 @@ router.post('/addNew', async (req, res) => {
         res.status(500).send(err);
     });
 });
+
+
 
 router.put('/update/:id', async (req, resp) => {
     const updatedRights = await screenRightsModel.findByIdAndUpdate(req.params.id, req.body);
