@@ -20,5 +20,5 @@ const screenRightsSchema = new mongoose.Schema({
     }
 });
 
-const screenRightsModel = mongoose.model('screenRight', screenRightsSchema);
+const screenRightsModel = mongoose.model('newScreenRight', screenRightsSchema);
 module.exports = screenRightsModel;

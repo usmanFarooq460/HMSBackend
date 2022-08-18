@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
 
-const defineStoreNameSchema = new mongoose.Schema({
-    drugType: {
+const defineStoreSchema = new mongoose.Schema({
+    storeName: {
         type: String,
         required: [true, "Drug Type is required:"]
+    },
+    storeLocation: {
+        type: String,
+        required: [true, "Drug Type is required:"]
+    },
+    storeDescription: {
+        type: String,
     }
 });
 
 const defineStoreModel = mongoose.model('defineStore', defineStoreSchema);
-module.exports = defDrugTypeModel;
+module.exports = defineStoreModel;
