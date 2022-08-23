@@ -3,11 +3,11 @@ const { response } = require("express");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const morgan = require("morgan")
+const morgan = require("morgan");
+
 // MiddleWares
 app.use(express.json());
 app.use(morgan('tiny'));
-
 
 //Cors
 const cors = require('cors');
@@ -15,6 +15,7 @@ app.use(cors({
     origin: '*'
 }));
 
+// ............. Listening on browser .......................
 let port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log("running on port 3000");
@@ -65,3 +66,12 @@ app.use('/def-drugType', defDrugTypeRouter)
 
 const defDrugRouter = require('./Routers/Pharmacy/def-drugs/def-drugs-router')
 app.use('/def_drug', defDrugRouter)
+
+const defStore = require('./Routers/Pharmacy/Store-Management/define-store')
+app.use('/def_Store', defStore)
+
+const defRack = require("./Routers/Pharmacy/Store-Management/define-rack-router")
+app.use('/def_rack', defRack)
+
+const AddRecordToStore = require("./Routers/Pharmacy/Store-Management/add_itme_in_store_router")
+app.use('/add_Record_in_store', AddRecordToStore)

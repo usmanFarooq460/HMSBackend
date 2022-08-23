@@ -1,6 +1,5 @@
 const defStoreModel = require('./../../../Models/Pharmacy/store-Management/define-store-model')
 const express = require("express");
-const { response } = require('express');
 const router = express.Router();
 
 router.get("/getAll", async (req, res) => {
@@ -13,11 +12,12 @@ router.get("/getAll", async (req, res) => {
 });
 
 router.post('/addNew', async (req, res) => {
+    console.log("body : ",req.body);
     const newStore = new defStoreModel(req.body);
     newStore.save().then(() => {
-        res.status(201).send(newdrugType);
+        res.status(201).send(newStore);
     }).catch((err) => {
-        res.status(500).send(err);
+        res.status(500).send("An Error has beeb occured",err);
     });
 });
 

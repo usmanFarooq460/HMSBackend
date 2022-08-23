@@ -14,7 +14,7 @@ router.get("/getAll", async (req, res) => {
 
 router.post('/addNew', async (req, res) => {
     const newdrugType = new defDrugTypeModel(req.body);
-    newdrugType.save().then(() => {
+     newdrugType.save().then(() => {
         res.status(201).send(newdrugType);
     }).catch((err) => {
         res.status(500).send(err);

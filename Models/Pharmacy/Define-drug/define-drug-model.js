@@ -35,6 +35,9 @@ const definingDrugSchema = new mongoose.Schema({
         type: Number,
         required: [true, "retail price is required"]
     },
+    ManufacturingPrice: {
+        type: Number,
+    },
     drugTypeName: {
         type: String,
         required: [true, "Drug Type is required"]
