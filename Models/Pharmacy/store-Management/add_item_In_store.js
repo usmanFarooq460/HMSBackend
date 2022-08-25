@@ -11,18 +11,18 @@ const addMedicinesInStoreSchema = new mongoose.Schema({
     },
     rackId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "AllRack",
+        ref: "allracks",
         required: [true, "Rack is required"]
     },
     medicineType: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "drugType",
+        ref: "drugtypes",
         required: [true, "Medicine Type is required"]
     },
     medicineId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "drugType",
-        required: [true, "Medicine Type is required"]
+        ref: "defdrugs",
+        required: [true, "Medicine is required"]
     },
     qty: {
         type: Number,
@@ -31,7 +31,7 @@ const addMedicinesInStoreSchema = new mongoose.Schema({
     size: {
         type: String
     }
-})
+});
 
 const addMedicinesInStoreModel = mongoose.model("ItemsInStore", addMedicinesInStoreSchema);
 module.exports = addMedicinesInStoreModel
