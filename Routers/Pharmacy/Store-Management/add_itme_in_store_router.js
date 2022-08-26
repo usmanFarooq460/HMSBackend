@@ -7,27 +7,45 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/getAll", async (req, res) => {
+  let historyObj
   let allStoreMedicines = [];
+
   allStoreMedicines = await StoreModel.find();
   let finalArrayforStore = [];
-  allStoreMedicines?.map(async (item) => {
+  let testing = allStoreMedicines?.map(async (item) => {
     let storeObject = await defineStoreModel.findById(item.storeId);
     let rackObject = await defineRackModel.findById(item.rackId);
     let medicineTypesObject = await defineMedicineType.findById(
       item.medicineType
     );
     let medicineObject = await defineMedicineModel.findById(item.medicineId);
-    console.log("medicine Object : ", medicineObject);
-    // console.log("store object: ", storeObject, "rack name ", rackObject);
-    // console.log("define medicine  type : ", medicineTypesObject);
-    // Now Simply add objects in array and send to frontend
+    historyObj = {
+      storeName: storeObject.storeName,
+      RackName: rackObject.rackName,
+      medicineType: medicineTypesObject.drugType,
+      medicineName: medicineObject.drugName,
+      manufacturingDate: medicineObject.manufacturingDate,
+      expiryDate: medicineObject.expiryDate,
+      batchNo: medicineObject.batchNo,
+      retailPrice: medicineObject.retailPrice,
+    }
+    finalArrayforStore.push(historyObj)
+    return "sdfsdafdasfsdf"
   });
-  if (allStoreMedicines) {
-    res.status(200).send(allStoreMedicines);
+
+  console.log("its history array  : ", historyObj);
+  console.log("testing is : ",testing);
+  console.log("final array to send for history", finalArrayforStore);
+  if (finalArrayforStore?.length) {
+    res.status(200).send(finalArrayforStore);
   } else {
     res.status(500).send("something went wrong");
   }
 });
+
+function myFunction(num) {
+  return num * 10;
+}
 
 // router.get("/getAll", async (req, res) => {
 //   let allStoreMedicines = await StoreModel.find()
