@@ -12,7 +12,8 @@ router.get("/getAll", async (req, res) => {
 
   allStoreMedicines = await StoreModel.find();
   let finalArrayforStore = [];
-  let testing = allStoreMedicines?.map(async (item) => {
+
+  for (const item of allStoreMedicines) {
     let storeObject = await defineStoreModel.findById(item.storeId);
     let rackObject = await defineRackModel.findById(item.rackId);
     let medicineTypesObject = await defineMedicineType.findById(
@@ -30,22 +31,13 @@ router.get("/getAll", async (req, res) => {
       retailPrice: medicineObject.retailPrice,
     }
     finalArrayforStore.push(historyObj)
-    return "sdfsdafdasfsdf"
-  });
-
-  console.log("its history array  : ", historyObj);
-  console.log("testing is : ",testing);
-  console.log("final array to send for history", finalArrayforStore);
+  }
   if (finalArrayforStore?.length) {
     res.status(200).send(finalArrayforStore);
   } else {
     res.status(500).send("something went wrong");
   }
 });
-
-function myFunction(num) {
-  return num * 10;
-}
 
 // router.get("/getAll", async (req, res) => {
 //   let allStoreMedicines = await StoreModel.find()
