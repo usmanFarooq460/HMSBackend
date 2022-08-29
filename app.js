@@ -7,7 +7,7 @@ const morgan = require("morgan");
 
 // MiddleWares
 app.use(express.json());
-app.use(morgan('tiny'));
+// app.use(morgan('tiny'));
 
 //Cors
 const cors = require('cors');

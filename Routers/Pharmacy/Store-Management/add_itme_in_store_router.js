@@ -5,6 +5,7 @@ const defineMedicineType = require("./../../../Models/Pharmacy/Define-drug/defin
 const defineMedicineModel = require("./../../../Models/Pharmacy/Define-drug/define-drug-model");
 const express = require("express");
 const router = express.Router();
+const ObjectId = require('mongodb').ObjectId;
 
 router.get("/getAll", async (req, res) => {
   let historyObj
@@ -21,6 +22,7 @@ router.get("/getAll", async (req, res) => {
     );
     let medicineObject = await defineMedicineModel.findById(item.medicineId);
     historyObj = {
+      _id: item._id,
       storeName: storeObject.storeName,
       RackName: rackObject.rackName,
       medicineType: medicineTypesObject.drugType,
@@ -29,9 +31,12 @@ router.get("/getAll", async (req, res) => {
       expiryDate: medicineObject.expiryDate,
       batchNo: medicineObject.batchNo,
       retailPrice: medicineObject.retailPrice,
+      size: item.size,
+      qty: item.qty
     }
     finalArrayforStore.push(historyObj)
   }
+  console.log("getting all");
   if (finalArrayforStore?.length) {
     res.status(200).send(finalArrayforStore);
   } else {
@@ -79,8 +84,25 @@ router.delete("delete/:Id", async (req, res) => {
 });
 
 router.get("getById/:Id", async (req, res) => {
+  console.log("id for data by id : ", req.params.Id);
   let dataById = await StoreModel.findById(req.params.Id);
-  console.log("data by Id", dataById);
+  console.log("data by Id", dsf);
+  if (dataById) {
+    res.status(200).send(allStoreMedicines);
+  } else {
+    res.status(500).send("something went wrong");
+  }
+});
+
+router.get("/getById/:Id", async (req, res) => {
+  var good_id = new ObjectId(req.params.Id);
+  const singleStoreData = await StoreModel.findOne({ _id: good_id })
+  console.log("single user : ",singleStoreData);
+  if (singleStoreData) {
+      res.status(200).send(singleStoreData)
+  } else {
+      res.status(500).send("something went wrong")
+  }
 });
 
 module.exports = router;
