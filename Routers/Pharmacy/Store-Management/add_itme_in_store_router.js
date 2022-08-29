@@ -32,9 +32,10 @@ router.get("/getAll", async (req, res) => {
       batchNo: medicineObject.batchNo,
       retailPrice: medicineObject.retailPrice,
       size: item.size,
-      qty: item.qty
+      qty: item.qty,
+      remarks: item.remarks
     }
-    finalArrayforStore.push(historyObj)
+    finalArrayforStore.push(historyObj);
   }
   console.log("getting all");
   if (finalArrayforStore?.length) {
@@ -71,37 +72,26 @@ router.post("/addNew", async (req, res) => {
     });
 });
 
-router.put("update/:Id", async (req, res) => {
-  let updatedStoreRecord = StoreModel.findOneAndUpdate(req.params.Id, req.body);
+router.put("/update/:Id", async (req, res) => {
+  let updatedStoreRecord = await StoreModel.findOneAndUpdate(req.params.Id, req.body);
   if (updatedStoreRecord) res.status(200).send(updatedStoreRecord);
   else res.status(500).send("Some thing went wrong");
 });
 
-router.delete("delete/:Id", async (req, res) => {
-  let deletedRecord = StoreModel.findByIdAndRemove(req.params.Id);
+router.delete("/delete/:Id", async (req, res) => {
+  let deletedRecord =await StoreModel.findByIdAndRemove(req.params.Id);
   if (deletedRecord) res.status(200).send(deletedRecord);
   else res.status(500).send("something went wrong");
-});
-
-router.get("getById/:Id", async (req, res) => {
-  console.log("id for data by id : ", req.params.Id);
-  let dataById = await StoreModel.findById(req.params.Id);
-  console.log("data by Id", dsf);
-  if (dataById) {
-    res.status(200).send(allStoreMedicines);
-  } else {
-    res.status(500).send("something went wrong");
-  }
 });
 
 router.get("/getById/:Id", async (req, res) => {
   var good_id = new ObjectId(req.params.Id);
   const singleStoreData = await StoreModel.findOne({ _id: good_id })
-  console.log("single user : ",singleStoreData);
+  console.log("single user : ", singleStoreData);
   if (singleStoreData) {
-      res.status(200).send(singleStoreData)
+    res.status(200).send(singleStoreData)
   } else {
-      res.status(500).send("something went wrong")
+    res.status(500).send("something went wrong")
   }
 });
 

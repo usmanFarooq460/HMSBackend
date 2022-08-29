@@ -30,6 +30,9 @@ const addMedicinesInStoreSchema = new mongoose.Schema({
     },
     size: {
         type: String
+    },
+    remarks:{
+        type:String,
     }
 });
 
