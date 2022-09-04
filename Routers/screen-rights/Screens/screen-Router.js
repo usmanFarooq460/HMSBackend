@@ -5,7 +5,6 @@ const router = express.Router();
 
 router.get("/getAll", async (req, res) => {
     const screens = await ScreenModel.find().catch('error found ');
-    console.log("All Screens: ", screens);
     if (screens) {
         res.status(200).send(screens)
     } else {
@@ -15,7 +14,6 @@ router.get("/getAll", async (req, res) => {
 
 router.post("/AddNew", async (req, res) => {
     const screenList = await ScreenModel.find().catch('error found ');
-    console.log("Screnn list list : ", screenList);
     const newScreen = new ScreenModel(req.body);
     newScreen.save().then(() => {
         res.status(201).send(newScreen);
@@ -26,7 +24,6 @@ router.post("/AddNew", async (req, res) => {
 });
 
 router.put("/update/:Id", async (req, res) => {
-    console.log("req.params.Id", req.params.Id);
     const updatedScreen = await ScreenModel.findByIdAndUpdate(req.params.Id, req.body);
     if (updatedScreen) {
         return res.status(200).json({ success: true, message: "screen has updated: " });

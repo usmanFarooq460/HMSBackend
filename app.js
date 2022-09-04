@@ -29,8 +29,8 @@ app.get("/", (req, res) => {
 function connectMongoos() {
     mongoose
         .connect(
-            "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
-            // "mongodb://127.0.0.1:27017/Hospital_Management"
+            // "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
+            "mongodb://127.0.0.1:27017/Hospital_Management"
         )
         .then(() => {
             console.log("Data Base connected");
@@ -62,16 +62,19 @@ app.use('/screens-rights', screensRightsRouter);
 
 // Pharmacy managment******************************************************
 const defDrugTypeRouter = require('./Routers/Pharmacy/def-drugs/def-drug-type/def-drug-type-router')
-app.use('/def-drugType', defDrugTypeRouter)
+app.use('/def-drugType', defDrugTypeRouter);
 
 const defDrugRouter = require('./Routers/Pharmacy/def-drugs/def-drugs-router')
-app.use('/def_drug', defDrugRouter)
+app.use('/def_drug', defDrugRouter);
 
 const defStore = require('./Routers/Pharmacy/Store-Management/define-store')
-app.use('/def_Store', defStore)
+app.use('/def_Store', defStore);
 
 const defRack = require("./Routers/Pharmacy/Store-Management/define-rack-router")
-app.use('/def_rack', defRack)
+app.use('/def_rack', defRack);
 
 const AddRecordToStore = require("./Routers/Pharmacy/Store-Management/add_itme_in_store_router")
-app.use('/add_Record_in_store', AddRecordToStore)
+app.use('/add_Record_in_store', AddRecordToStore);
+
+const saleInvoiceRouter = require("./Routers/Pharmacy/sale-invoice-router")
+app.use('/saleInvoice', saleInvoiceRouter);

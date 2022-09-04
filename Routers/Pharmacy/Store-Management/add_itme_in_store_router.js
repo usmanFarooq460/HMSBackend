@@ -37,7 +37,6 @@ router.get("/getAll", async (req, res) => {
     }
     finalArrayforStore.push(historyObj);
   }
-  console.log("getting all");
   if (finalArrayforStore?.length) {
     res.status(200).send(finalArrayforStore);
   } else {
@@ -60,7 +59,6 @@ router.get("/getAll", async (req, res) => {
 // });
 
 router.post("/addNew", async (req, res) => {
-  console.log("requested body is : ", req.body);
   const newStoreRecord = new StoreModel(req.body);
   newStoreRecord
     .save()
@@ -87,7 +85,6 @@ router.delete("/delete/:Id", async (req, res) => {
 router.get("/getById/:Id", async (req, res) => {
   var good_id = new ObjectId(req.params.Id);
   const singleStoreData = await StoreModel.findOne({ _id: good_id })
-  console.log("single user : ", singleStoreData);
   if (singleStoreData) {
     res.status(200).send(singleStoreData)
   } else {

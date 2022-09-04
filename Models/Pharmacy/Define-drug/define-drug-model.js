@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { format } = require("morgan");
 
 const definingDrugSchema = new mongoose.Schema({
     drugName: {
@@ -12,7 +13,6 @@ const definingDrugSchema = new mongoose.Schema({
     },
     drugCode: {
         type: String,
-        // unique: [true, "user name should be unique"],
         required: [true, 'Drug Code is required'],
     },
     drugFormulae: {
@@ -21,7 +21,8 @@ const definingDrugSchema = new mongoose.Schema({
     },
     manufacturingDate: {
         type: Date,
-        required: [true, 'manufacturing date is required']
+        required: [true, 'manufacturing date is required'],
+        format: "yyyy-MM-dd"
     },
     expiryDate: {
         type: Date,

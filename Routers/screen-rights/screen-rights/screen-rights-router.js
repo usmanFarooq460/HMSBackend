@@ -9,12 +9,11 @@ router.get("/getAll", async (req, res) => {
     if (screensRights) {
         res.status(200).send(screensRights)
     } else {
-        res.status(500).send("something went wrong")
+        res.status(500).send("something went wrong");
     }
 });
 
 router.post('/addNew', async (req, res) => {
-    console.log("adding new screen right", req.body);
     const newScreenRight = new screenRightsModel(req.body);
     newScreenRight.save().then(() => {
         res.status(201).send(newScreenRight);
@@ -22,8 +21,6 @@ router.post('/addNew', async (req, res) => {
         res.status(500).send(err);
     });
 });
-
-
 
 router.put('/update/:id', async (req, resp) => {
     const updatedRights = await screenRightsModel.findByIdAndUpdate(req.params.id, req.body);
@@ -43,7 +40,6 @@ router.get('/getRightsByUserId/:id', async (req, res) => {
     let listOfAllRightsList = [];
     listOfAllRightsList = await screenRightsModel.find();
     if (listOfAllRightsList?.length > 0 && singleUser) {
-        console.log(gettingRightsList(req.params.id, listOfAllRightsList));
         res.status(200).send(gettingRightsList(req.params.id, listOfAllRightsList))
     } else if (singleUser) {
         res.status(200).send([]);
@@ -57,7 +53,6 @@ function gettingRightsList(id, listOfRights) {
     let matchedList = {}
     for (let i = 0; i < listOfRights.length; i++) {
         if (listOfRights[i].userId == id) {
-            console.log("user found with some rights");
             matchedList = listOfRights[i];
         }
     }
