@@ -1,17 +1,19 @@
-const DepartmentModel = require("./../../Models/Department/department-model");
+const mainModel = require("./../../Models/appointment/appointment-model");
 const express = require("express");
 const router = express.Router();
 // const ObjectId = require('mongodb').ObjectId;
 
 router.get("/getAll", async (req, res) => {
-    allDepartments = await DepartmentModel.find()
+    allDepartments = await mainModel.find()
+        .populate({ path: "patient", model: "patient" })
+        .populate({ path: "department", model: "department" })
     if (allDepartments) res.status(200).send(allDepartments);
     else res.status(200).send("something went wrong")
 })
 
 router.post("/addNew", async (req, res) => {
     console.log("data for save : ", req.body);
-    const newDeparmtent = new DepartmentModel(req.body);
+    const newDeparmtent = new mainModel(req.body);
     newDeparmtent.save().then(() => {
         res.status(201).send(newDeparmtent);
     }).catch((err) => {
@@ -20,14 +22,14 @@ router.post("/addNew", async (req, res) => {
 });
 
 router.put("/update/:id", async (req, res) => {
-    let updatedDepartment = await DepartmentModel.findByIdAndUpdate(req.params.id, req.body);
+    let updatedDepartment = await mainModel.findByIdAndUpdate(req.params.id, req.body);
     if (updatedDepartment) {
         res.status(200).json({ success: true, message: updatedDepartment });
     } else res.status(500).json({ success: false, message: "staff Type Not Found" });
 });
 
 router.get("/getById/:id", async (req, res) => {
-    let singleDepartment = await DepartmentModel.findById(req.params.id)
+    let singleDepartment = await mainModel.findById(req.params.id)
     if (singleDepartment) {
         res.status(200).send(singleDepartment);
     } else res.status(500).json({ success: false, message: "staff Type Not Found" });
@@ -35,7 +37,7 @@ router.get("/getById/:id", async (req, res) => {
 
 router.delete('/delete/:id', async (req, res) => {
     const id = req.params.id;
-    let deleted = await DepartmentModel.findByIdAndRemove(id)
+    let deleted = await mainModel.findByIdAndRemove(id)
     if (deleted) res.status(200).send(deleted)
     else res.status(500).json({ success: false, message: "Not Deleted" });
 });
