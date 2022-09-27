@@ -23,8 +23,14 @@ const SaleInvoiceSchema = new mongoose.Schema({
     },
     createdAt: { type: Date, },
     headerRemarks: { type: String },
+    isSelected: { type: Boolean, default: false },
     InvoiceDetailList: [
         {
+            storeRecordId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'ItemsInStore',
+                required: [true, "Store Record Id is Required"]
+            },
             store: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'definestores',
@@ -48,7 +54,11 @@ const SaleInvoiceSchema = new mongoose.Schema({
                 type: Number,
                 required: [true, "final amount is required"]
             },
-            remarks: { type: String }
+            remarks: { type: String },
+            storeName: String,
+            MedicineName: String,
+            MedicineTypeName: String,
+            previousQtyInUpdateCase: Number
         },
     ],
 });

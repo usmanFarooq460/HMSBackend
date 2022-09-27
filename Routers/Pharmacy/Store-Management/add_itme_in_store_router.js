@@ -71,13 +71,13 @@ router.post("/addNew", async (req, res) => {
 });
 
 router.put("/update/:Id", async (req, res) => {
-  let updatedStoreRecord = await StoreModel.findOneAndUpdate(req.params.Id, req.body);
+  let updatedStoreRecord = await StoreModel.findByIdAndUpdate(req.params.Id, req.body);
   if (updatedStoreRecord) res.status(200).send(updatedStoreRecord);
   else res.status(500).send("Some thing went wrong");
 });
 
 router.delete("/delete/:Id", async (req, res) => {
-  let deletedRecord =await StoreModel.findByIdAndRemove(req.params.Id);
+  let deletedRecord = await StoreModel.findByIdAndRemove(req.params.Id);
   if (deletedRecord) res.status(200).send(deletedRecord);
   else res.status(500).send("something went wrong");
 });
@@ -90,6 +90,36 @@ router.get("/getById/:Id", async (req, res) => {
   } else {
     res.status(500).send("something went wrong")
   }
+});
+
+router.get("/getExpiredMedicines", async (req, res) => {
+  let expiredList = []
+  const StoreData = await StoreModel.find().populate({ path: "medicineId", model: "DefDrugs" });
+  for (let i = 0; i < StoreData.length; i++) {
+    console.log("store data expiry date : ", StoreData[i].medicineId.expiryDate);
+    let expired = new Date(StoreData[i].medicineId.expiryDate)
+    if (expired < new Date()) {
+      expiredList.push(StoreData[i])
+    }
+  }
+  console.log("Expired medicines: ", expiredList);
+  if (expiredList) {
+    res.status(200).send(expiredList)
+  }
+});
+
+router.get("/getPersistedMedidines", async (req, res) => {
+  let persistedList = [];
+  const StoreData = await StoreModel.find().populate({ path: "medicineId", model: "DefDrugs" });
+  for (let i = 0; i < StoreData.length; i++) {
+    console.log("store data expiry date : ", StoreData[i].medicineId.expiryDate);
+    let expiryDate = new Date(StoreData[i].medicineId.expiryDate)
+    if (expiryDate > new Date()) {
+      persistedList.push(StoreData[i])
+    }
+  }
+  console.log("Persisted Medicines: ", persistedList);
+  res.status(200).send(persistedList)
 });
 
 module.exports = router;

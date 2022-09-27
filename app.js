@@ -1,5 +1,4 @@
 
-const { response } = require("express");
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -31,6 +30,7 @@ function connectMongoos() {
         .connect(
             "mongodb+srv://UsmanFarooq:03074324285@cluster0.9coy9.mongodb.net/HosspitalManagement?retryWrites=true&w=majority"
             // "mongodb://127.0.0.1:27017/Hospital_Management"
+            // "mongodb://127.0.0.1:27017/nakashtesting"
         )
         .then(() => {
             console.log("Data Base connected");
@@ -78,3 +78,17 @@ app.use('/add_Record_in_store', AddRecordToStore);
 
 const saleInvoiceRouter = require("./Routers/Pharmacy/sale-invoice-router")
 app.use('/saleInvoice', saleInvoiceRouter);
+
+//*************************** Staff *********************** 
+const staffTypeRouter = require("./Routers/Staff-Router/staff-type-router")
+app.use('/staffType', staffTypeRouter);
+
+const staffRouter = require("./Routers/Staff-Router/add-staff-router")
+app.use('/addStaff', staffRouter);
+
+const patientsModel = require("./Routers/patients-router/patients-router")
+app.use('/addPatients', patientsModel);
+
+const departmentModel = require("./Routers/Department/department-router")
+app.use('/department', departmentModel);
+

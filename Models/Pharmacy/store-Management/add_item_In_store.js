@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 
 const addMedicinesInStoreSchema = new mongoose.Schema({
-    recordNo: {
-        type: Number
-    },
+    recordNo: Number,
     storeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'definestores',
@@ -31,9 +29,10 @@ const addMedicinesInStoreSchema = new mongoose.Schema({
     size: {
         type: String
     },
-    remarks:{
-        type:String,
-    }
+    remarks: {
+        type: String,
+    },
+    isExpired: { type: Boolean, default: false }
 });
 
 const addMedicinesInStoreModel = mongoose.model("ItemsInStore", addMedicinesInStoreSchema);
